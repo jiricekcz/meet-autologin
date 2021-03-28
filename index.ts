@@ -13,12 +13,13 @@ if (!fs.existsSync(credLocation)) {
 const meetLink = process.argv[2];
 const eIn = Number(process.argv[3]);
 
+const wf = Number(process.argv[4]) || 0;
+
 if (Number.isNaN(eIn)) {
     throw new Error("Vole ses kokot.");
 }
 
 const creds: {email: string, password: string} = JSON.parse(fs.readFileSync(credLocation).toString());
-
 async function main() {
     const browser = await puppeteer.launch({
         headless: false,
@@ -32,7 +33,7 @@ async function main() {
     await clickButton(page, "VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b");
 
     await waitForRequests(page, 7);
-    await wait(200);
+    await wait(200 + wf);
 
     await fillInput(page, "whsOnd zHQkBf", creds.password);
     await clickButton(page, "VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qIypjc TrZEUc lw1w4b");
@@ -80,5 +81,12 @@ async function waitForRequests(page: puppeteer.Page ,n: number, check: () => boo
     for (var i = 0; i < n; i++) {
         await page.waitForRequest(check);
     }
+}
+function installChromium(): Promise<void>{
+    return new Promise<void>((resolve, reject) =>{
+        childProcess.fork("./node_modules/puppeteer/install.js").on("close", () => {
+            resolve();
+        });
+    });
 }
 main();

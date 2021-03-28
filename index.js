@@ -50,6 +50,7 @@ if (!fs_1.default.existsSync(credLocation)) {
 }
 var meetLink = process.argv[2];
 var eIn = Number(process.argv[3]);
+var wf = Number(process.argv[4]) || 0;
 if (Number.isNaN(eIn)) {
     throw new Error("Vole ses kokot.");
 }
@@ -80,7 +81,7 @@ function main() {
                     return [4 /*yield*/, waitForRequests(page, 7)];
                 case 6:
                     _a.sent();
-                    return [4 /*yield*/, wait(200)];
+                    return [4 /*yield*/, wait(200 + wf)];
                 case 7:
                     _a.sent();
                     return [4 /*yield*/, fillInput(page, "whsOnd zHQkBf", creds.password)];
@@ -178,6 +179,13 @@ function waitForRequests(page, n, check) {
                     return [3 /*break*/, 1];
                 case 4: return [2 /*return*/];
             }
+        });
+    });
+}
+function installChromium() {
+    return new Promise(function (resolve, reject) {
+        child_process_1.default.fork("./node_modules/puppeteer/install.js").on("close", function () {
+            resolve();
         });
     });
 }
