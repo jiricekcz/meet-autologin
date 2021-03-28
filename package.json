@@ -1,0 +1,26 @@
+{
+  "name": "meet-autologin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiricekcz/meet-autologin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiricekcz/meet-autologin/issues"
+  },
+  "homepage": "https://github.com/jiricekcz/meet-autologin#readme",
+  "dependencies": {
+    "@types/node": "^14.14.37",
+    "puppeteer": "^8.0.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
